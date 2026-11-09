@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GRCVN Website Demo</title>
+  <meta name="description" content="Ba phương án thiết kế website cho General Resources Vietnam.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta property="og:title" content="GRCVN — 3 phương án website">
+  <meta property="og:description" content="Ba phương án thiết kế website cho General Resources Vietnam (Getac · MiTAC).">
+  <meta property="og:image" content="https://grcvn.vxid.io/assets/og/v1.jpg">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --bg: #0f1115; --card: #171a20; --line: #262a33; --ink: #f2f3f5; --mute: #9aa1ad; --red: #e0233f; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--ink); font: 400 16px/1.6 'Be Vietnam Pro', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+    .wrap { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+    header { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 28px 0; }
+    .brand { display: flex; align-items: center; gap: 12px; font-weight: 700; }
+    .brand i { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 10px; background: var(--red); font-style: normal; font-size: 13px; font-weight: 800; }
+    .brand small { display: block; color: var(--mute); font-weight: 500; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; }
+    .lang { display: inline-flex; padding: 3px; border-radius: 999px; background: var(--card); border: 1px solid var(--line); }
+    .lang button { border: 0; background: none; color: var(--mute); padding: 6px 12px; border-radius: 999px; font: 700 12px/1 inherit; font-family: inherit; cursor: pointer; }
+    .lang button[aria-pressed="true"] { background: var(--ink); color: #111; }
+    h1 { font-size: clamp(2rem, 5vw, 3.4rem); line-height: 1.12; letter-spacing: -.035em; margin: 36px 0 16px; max-width: 820px; }
+    .lead { color: var(--mute); font-size: 18px; max-width: 700px; margin: 0; }
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin: 52px 0 72px; }
+    .card { display: flex; flex-direction: column; background: var(--card); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; text-decoration: none; color: inherit; transition: transform .25s, border-color .25s, box-shadow .25s; }
+    .card:hover { transform: translateY(-4px); border-color: #3a404c; box-shadow: 0 24px 50px rgba(0,0,0,.35); }
+    .shot { aspect-ratio: 16 / 10; overflow: hidden; border-bottom: 1px solid var(--line); background: #000; }
+    .shot img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; transition: transform .6s; }
+    .card:hover .shot img { transform: scale(1.03); }
+    .body { padding: 22px 22px 24px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+    .tag { font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--mute); }
+    .card h2 { margin: 0; font-size: 24px; letter-spacing: -.02em; }
+    .card p { margin: 0; color: var(--mute); font-size: 15px; }
+    .open { margin-top: auto; padding-top: 10px; font-weight: 600; color: var(--ink); }
+    .open::after { content: ' →'; }
+    .swatches { display: flex; gap: 6px; }
+    .swatches span { width: 18px; height: 18px; border-radius: 50%; border: 1px solid rgba(255,255,255,.15); }
+    section.todo { border-top: 1px solid var(--line); padding: 56px 0 80px; display: grid; grid-template-columns: 1fr 1.4fr; gap: 48px; }
+    section.todo h3 { margin: 0 0 10px; font-size: 26px; letter-spacing: -.02em; }
+    section.todo > div > p { color: var(--mute); margin: 0; }
+    ol { margin: 0; padding: 0; list-style: none; counter-reset: n; display: grid; gap: 2px; }
+    ol li { counter-increment: n; display: grid; grid-template-columns: 34px 1fr; gap: 10px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+    ol li::before { content: counter(n, decimal-leading-zero); color: var(--red); font-weight: 700; font-size: 13px; padding-top: 2px; }
+    ol b { display: block; }
+    ol span { color: var(--mute); font-size: 14px; }
+    footer { color: var(--mute); font-size: 13px; padding: 0 0 40px; }
+    .ai-banner { display: grid; grid-template-columns: auto 1fr auto; gap: 20px; align-items: center; margin: 40px 0 0; padding: 22px 26px; border-radius: 18px; text-decoration: none; color: #fff; background: radial-gradient(600px 200px at 85% 0%, #2a4396 0%, transparent 70%), linear-gradient(120deg, #0c1430, #16224a); border: 1px solid #2a3768; transition: transform .25s, box-shadow .25s; }
+    .ai-banner:hover { transform: translateY(-3px); box-shadow: 0 24px 50px rgba(12,20,48,.5); }
+    .ai-banner .clock { font-size: 34px; font-weight: 300; letter-spacing: -.03em; color: #ffd27a; }
+    .ai-banner b { display: block; font-size: 19px; letter-spacing: -.01em; }
+    .ai-banner span.sub { color: rgba(255,255,255,.7); font-size: 15px; }
+    .ai-banner .go { white-space: nowrap; font-weight: 700; padding: 10px 16px; border-radius: 10px; background: #fff; color: #0c1430; }
+    @media (max-width: 640px) { .ai-banner { grid-template-columns: 1fr; gap: 10px; } .ai-banner .go { justify-self: start; } }
+    [data-en] { display: none; }
+    html[lang="en"] [data-vi] { display: none; }
+    html[lang="en"] [data-en] { display: revert; }
+    @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } section.todo { grid-template-columns: 1fr; gap: 24px; } }
+    @media (max-width: 640px) { .wrap { padding: 0 16px; } .lead { font-size: 16px; } }
+    @media (max-width: 640px) { .lang button { padding: 10px 14px; } }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand"><i>GRC</i><div>General Resources Vietnam<small>Website demo</small></div></div>
+      <div class="lang" role="group" aria-label="Language"><button type="button" data-l="vi" aria-pressed="true">VI</button><button type="button" data-l="en" aria-pressed="false">EN</button></div>
+    </header>
+
+    <h1><span data-vi>Ba phương án thiết kế cho website General Resources Vietnam</span><span data-en>Three design directions for the General Resources Vietnam website</span></h1>
+    <p class="lead"><span data-vi>Cả ba dùng chung một nội dung song ngữ Việt / Anh, đều chạy tốt trên điện thoại, có form báo giá, xem chi tiết sản phẩm và nút gọi nhanh. Chọn phương án phù hợp nhất — nội dung sẽ được hoàn thiện theo thông tin GRC VN cung cấp.</span><span data-en>All three share the same bilingual Vietnamese / English content, work on phones, and include a quote form, product detail views and a click-to-call button. Pick the direction you like — we will finish the content with the details you send us.</span></p>
+
+    <a class="ai-banner" href="ai/">
+      <span class="clock">02:14</span>
+      <span><b><span data-vi>Mới: Website trong thời AI — kế hoạch 3 bước</span><span data-en>New: Websites in the AI era — a 3-step plan</span></b><span class="sub"><span data-vi>Vì sao website phải trả lời được cả người lẫn AI, 24/7. Đọc trong 3 phút.</span><span data-en>Why the site must answer both people and AI, 24/7. A 3-minute read.</span></span></span>
+      <span class="go"><span data-vi>Đọc ngay →</span><span data-en>Read it →</span></span>
+    </a>
+
+    <div class="grid">
+      <a class="card" href="v1/">
+        <div class="shot"><img src="assets/thumbs/v1.webp" alt="" loading="lazy"></div>
+        <div class="body">
+          <span class="tag"><span data-vi>Phương án</span><span data-en>Option</span> A</span>
+          <h2>Enterprise</h2>
+          <p><span data-vi>Sáng, chuyên nghiệp, màu đỏ thương hiệu. Phù hợp hình ảnh doanh nghiệp B2B, dễ tin cậy với khách hàng cơ quan nhà nước.</span><span data-en>Light and polished with brand red. A classic B2B look that reads as trustworthy to enterprise and government buyers.</span></p>
+          <div class="swatches"><span style="background:#fff"></span><span style="background:#c8102e"></span><span style="background:#0b1424"></span></div>
+          <span class="open"><span data-vi>Xem phương án A</span><span data-en>Open option A</span></span>
+        </div>
+      </a>
+      <a class="card" href="v2/">
+        <div class="shot"><img src="assets/thumbs/v2.webp" alt="" loading="lazy"></div>
+        <div class="body">
+          <span class="tag"><span data-vi>Phương án</span><span data-en>Option</span> B</span>
+          <h2>Field Ops</h2>
+          <p><span data-vi>Tối, mạnh mẽ, phong cách "hiện trường". Có biểu đồ tương tác so sánh độ bền: nhiệt độ, chiều cao rơi, chống nước, độ sáng.</span><span data-en>Dark and rugged with a field-ops feel. Includes an interactive stress-test chart: temperature, drop height, ingress and brightness.</span></p>
+          <div class="swatches"><span style="background:#0b0d0a"></span><span style="background:#ffb000"></span><span style="background:#cfd3c3"></span></div>
+          <span class="open"><span data-vi>Xem phương án B</span><span data-en>Open option B</span></span>
+        </div>
+      </a>
+      <a class="card" href="v3/">
+        <div class="shot"><img src="assets/thumbs/v3.webp" alt="" loading="lazy"></div>
+        <div class="body">
+          <span class="tag"><span data-vi>Phương án</span><span data-en>Option</span> C</span>
+          <h2>Blueprint</h2>
+          <p><span data-vi>Phong cách tạp chí kỹ thuật. Sơ đồ động "từ hiện trường đến trung tâm dữ liệu" giải thích giải pháp Getac + MiTAC trong một hình.</span><span data-en>Editorial, engineering-drawing style. An animated "field to data center" diagram explains the Getac + MiTAC offer in one picture.</span></p>
+          <div class="swatches"><span style="background:#f3f0e8"></span><span style="background:#12308f"></span><span style="background:#ef4a2a"></span></div>
+          <span class="open"><span data-vi>Xem phương án C</span><span data-en>Open option C</span></span>
+        </div>
+      </a>
+    </div>
+
+    <section class="todo">
+      <div>
+        <h3><span data-vi>Thông tin cần GRCVN xác nhận</span><span data-en>What we need from GRCVN</span></h3>
+        <p><span data-vi>Nội dung demo được tổng hợp từ thông tin công khai (đăng ký doanh nghiệp, trang Getac, MiTAC). Gửi cho chúng tôi dưới bất kỳ dạng nào — văn bản, file, ảnh.</span><span data-en>Demo content was compiled from public sources (business registry, Getac and MiTAC sites). Send it to us in any form — text, files, photos.</span></p>
+      </div>
+      <ol>
+        <li><div><b><span data-vi>Email liên hệ chính thức</span><span data-en>Official contact email</span></b><span><span data-vi>Hiện đang dùng sales@mitac.com.tw theo bản nháp.</span><span data-en>Currently sales@mitac.com.tw, taken from the draft.</span></span></div></li>
+        <li><div><b><span data-vi>Số Zalo / hotline di động</span><span data-en>Zalo / mobile hotline</span></b><span><span data-vi>Điền vào sẽ tự hiện nút "Chat Zalo".</span><span data-en>Adding it turns on the "Chat on Zalo" button.</span></span></div></li>
+        <li><div><b><span data-vi>Logo gốc và ảnh thực tế</span><span data-en>Original logo and real photos</span></b><span><span data-vi>Logo, ảnh văn phòng, đội ngũ, dự án đã triển khai.</span><span data-en>Logo, office, team and project photos.</span></span></div></li>
+        <li><div><b><span data-vi>Tư cách đối tác Getac / MiTAC</span><span data-en>Getac / MiTAC partner status</span></b><span><span data-vi>Nếu là nhà phân phối ủy quyền, website sẽ ghi rõ và gắn huy hiệu.</span><span data-en>If authorised, the site can say so and show the partner badge.</span></span></div></li>
+        <li><div><b><span data-vi>Danh mục sản phẩm thực tế đang bán</span><span data-en>Products actually sold</span></b><span><span data-vi>Đặc biệt dòng MiTAC Aowanda — MiTAC đã ngừng liệt kê trên catalog.</span><span data-en>Especially MiTAC Aowanda, which MiTAC no longer lists.</span></span></div></li>
+        <li><div><b><span data-vi>Số liệu về GRC Group</span><span data-en>GRC Group figures</span></b><span><span data-vi>Năm 1980, 9 hệ thống metro, 4 thị trường — lấy từ tin tuyển dụng.</span><span data-en>1980, 9 MRT networks, 4 markets — taken from job listings.</span></span></div></li>
+        <li><div><b><span data-vi>Tên miền</span><span data-en>Domain name</span></b><span><span data-vi>grcvn.com thuộc công ty khác; generalresources.com đang không hoạt động.</span><span data-en>grcvn.com belongs to another company; generalresources.com is not live.</span></span></div></li>
+      </ol>
+    </section>
+
+    <footer><span data-vi>Bản demo — không lập chỉ mục tìm kiếm. Getac, LumiBond và MiTAC là thương hiệu của các chủ sở hữu tương ứng.</span><span data-en>Demo — not indexed by search engines. Getac, LumiBond and MiTAC are trademarks of their respective owners.</span></footer>
+  </div>
+  <script>
+    (function () {
+      var KEY = 'grcvn-lang';
+      function get() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+      function set(l) {
+        document.documentElement.lang = l;
+        document.querySelectorAll('[data-l]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.l === l)); });
+        try { localStorage.setItem(KEY, l); } catch (e) {}
+      }
+      var q = new URLSearchParams(location.search).get('lang');
+      set(q === 'en' || q === 'vi' ? q : (get() || ((navigator.language || 'vi').toLowerCase().indexOf('vi') === 0 ? 'vi' : 'en')));
+      document.addEventListener('click', function (e) { var b = e.target.closest('[data-l]'); if (b) set(b.dataset.l); });
+    })();
+  </script>
+</body>
+</html>

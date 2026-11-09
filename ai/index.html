@@ -1,0 +1,681 @@
+<!doctype html>
+<html lang="vi" data-lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Website trong thời AI — Kế hoạch cho GRC VN</title>
+  <meta name="description" content="Kế hoạch 3 bước để website General Resources Vietnam được AI đọc hiểu, giới thiệu, và trả lời khách hàng 24/7.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#0c1430">
+  <meta property="og:title" content="Một website biết trả lời — kể cả lúc 2 giờ sáng">
+  <meta property="og:description" content="Kế hoạch 3 bước đưa website GRC VN vào thời AI.">
+  <meta property="og:image" content="https://grcvn.vxid.io/assets/og/ai.jpg">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #fbfaf7; --bg-2: #f3f1ea; --card: #ffffff; --ink: #14161b; --ink-2: #4f5561; --mute: #868c97;
+      --line: #e6e2d8; --red: #d71f3a; --red-tint: #fdecef; --green: #198a4c; --green-tint: #e6f5ec;
+      --amber: #b86e00; --amber-tint: #fff4e0; --night: #0c1430; --night-2: #16224a; --blue: #2f5bff;
+      --mono: 'JetBrains Mono', ui-monospace, monospace;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--bg); color: var(--ink); font: 400 17px/1.7 'Be Vietnam Pro', system-ui, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    html[data-lang="vi"] .en, html[data-lang="en"] .vi { display: none !important; }
+    h1, h2, h3 { margin: 0; line-height: 1.16; letter-spacing: -.025em; }
+    p { margin: 0; }
+    a { color: inherit; }
+    .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+    .narrow { max-width: 760px; }
+    .ico { width: 1.2em; height: 1.2em; flex: none; }
+    :focus-visible { outline: 3px solid rgba(47, 91, 255, .5); outline-offset: 2px; border-radius: 6px; }
+
+    /* top bar */
+    .top { position: absolute; inset: 0 0 auto 0; z-index: 5; }
+    .top-in { display: flex; justify-content: space-between; align-items: center; height: 72px; }
+    .back { display: inline-flex; align-items: center; gap: 10px; color: #fff; text-decoration: none; font-weight: 600; font-size: 15px; opacity: .85; }
+    .back:hover { opacity: 1; }
+    .back i { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 9px; background: var(--red); font-style: normal; font-size: 11px; font-weight: 800; }
+    .lang { display: inline-flex; padding: 3px; border-radius: 999px; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.15); }
+    .lang button { border: 0; background: none; color: rgba(255,255,255,.7); padding: 6px 12px; border-radius: 999px; font: 700 12px/1 'Be Vietnam Pro', sans-serif; cursor: pointer; }
+    .lang button[aria-pressed="true"] { background: #fff; color: var(--night); }
+
+    /* hero — night */
+    .hero { position: relative; overflow: hidden; color: #fff; background: radial-gradient(1200px 600px at 75% 20%, #233a86 0%, transparent 60%), linear-gradient(180deg, var(--night) 0%, #0f1a3d 100%); padding: 130px 0 110px; }
+    .stars { position: absolute; inset: 0; background-image:
+      radial-gradient(1.5px 1.5px at 12% 22%, #fff 50%, transparent 51%), radial-gradient(1px 1px at 28% 68%, #fff 50%, transparent 51%),
+      radial-gradient(1.2px 1.2px at 46% 14%, #fff 50%, transparent 51%), radial-gradient(1px 1px at 62% 82%, #fff 50%, transparent 51%),
+      radial-gradient(1.6px 1.6px at 84% 36%, #fff 50%, transparent 51%), radial-gradient(1px 1px at 92% 70%, #fff 50%, transparent 51%),
+      radial-gradient(1.2px 1.2px at 6% 86%, #fff 50%, transparent 51%), radial-gradient(1px 1px at 38% 40%, #fff 50%, transparent 51%),
+      radial-gradient(1.3px 1.3px at 72% 8%, #fff 50%, transparent 51%), radial-gradient(1px 1px at 54% 56%, #fff 50%, transparent 51%);
+      opacity: .55; animation: twinkle 6s ease-in-out infinite alternate; }
+    @keyframes twinkle { to { opacity: .25; } }
+    .hero-in { position: relative; display: grid; grid-template-columns: 1.25fr .9fr; gap: 56px; align-items: center; }
+    .chip { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 999px; font-size: 13px; font-weight: 600; }
+    .hero .chip { background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.16); color: rgba(255,255,255,.85); }
+    .hero h1 { font-size: clamp(2.3rem, 5.2vw, 4.2rem); font-weight: 800; margin: 22px 0 22px; text-wrap: balance; }
+    .hero h1 em { font-style: normal; background: linear-gradient(90deg, #ffd27a, #ff9a7a); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .hero .sub { font-size: 19px; color: rgba(255,255,255,.75); max-width: 580px; }
+    .scroll-cue { display: inline-flex; align-items: center; gap: 10px; margin-top: 36px; color: rgba(255,255,255,.6); font-size: 14px; text-decoration: none; }
+    .scroll-cue span { width: 22px; height: 34px; border: 2px solid rgba(255,255,255,.4); border-radius: 12px; position: relative; }
+    .scroll-cue span::after { content: ''; position: absolute; left: 50%; top: 6px; width: 3px; height: 7px; margin-left: -1.5px; border-radius: 2px; background: #fff; animation: wheel 1.8s infinite; }
+    @keyframes wheel { 60% { transform: translateY(9px); opacity: 0; } 100% { opacity: 0; } }
+    .night { position: relative; justify-self: center; width: 100%; max-width: 380px; }
+    .moon { position: absolute; right: -10px; top: -60px; width: 86px; height: 86px; border-radius: 50%; box-shadow: -18px 10px 0 0 #ffe7a8; transform: rotate(-20deg); filter: drop-shadow(0 0 24px rgba(255,231,168,.35)); }
+    .clock { font-size: 92px; font-weight: 300; letter-spacing: -.04em; line-height: 1; text-align: center; color: #fff; }
+    .clock small { display: block; font-size: 14px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: rgba(255,255,255,.55); margin-top: 8px; }
+    .notif { margin-top: 26px; display: grid; gap: 10px; }
+    .note { display: grid; grid-template-columns: 38px 1fr; gap: 12px; padding: 14px 16px; border-radius: 18px; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.14); backdrop-filter: blur(10px); animation: drop .7s cubic-bezier(.2,.8,.2,1) both; }
+    .note:nth-child(2) { animation-delay: 1.1s; }
+    .note:nth-child(3) { animation-delay: 2.2s; }
+    @keyframes drop { from { opacity: 0; transform: translateY(-14px) scale(.97); } }
+    .note b { display: block; font-size: 13px; }
+    .note p { font-size: 14px; color: rgba(255,255,255,.78); line-height: 1.45; }
+    .note .av { width: 38px; height: 38px; border-radius: 10px; display: grid; place-items: center; font-size: 12px; font-weight: 800; }
+    .av.bot { background: var(--red); }
+    .av.user { background: #3a4a85; }
+    .av.ok { background: var(--green); }
+
+    /* generic sections */
+    section.s { padding: 104px 0; }
+    .s-alt { background: var(--bg-2); }
+    .eyebrow { display: inline-flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--red); margin-bottom: 14px; }
+    .eyebrow b { display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: var(--red); color: #fff; font-size: 12px; letter-spacing: 0; }
+    h2 { font-size: clamp(1.9rem, 3.6vw, 2.9rem); font-weight: 800; text-wrap: balance; }
+    .lead { font-size: 19px; color: var(--ink-2); margin-top: 16px; max-width: 720px; }
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1); }
+    .reveal.in { opacity: 1; transform: none; }
+
+    /* 1. what changed */
+    .stat { display: grid; grid-template-columns: auto 1fr; gap: 28px; align-items: center; margin: 44px 0 56px; padding: 28px 32px; background: var(--card); border: 1px solid var(--line); border-radius: 20px; }
+    .stat .stat-n { font-size: clamp(4rem, 9vw, 6.4rem); font-weight: 800; line-height: 1; letter-spacing: -.05em; color: var(--red); }
+    .stat p { font-size: 19px; font-weight: 500; }
+    .stat small { display: block; margin-top: 8px; font-size: 13px; color: var(--mute); }
+    .lanes { display: grid; gap: 22px; }
+    .lane { display: grid; grid-template-columns: 150px 1fr; gap: 20px; align-items: center; padding: 24px; border-radius: 20px; border: 1px solid var(--line); background: var(--card); }
+    .lane-name { font-weight: 800; font-size: 18px; line-height: 1.3; }
+    .lane-name small { display: block; font-weight: 500; font-size: 13px; color: var(--mute); }
+    .steps-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .node { padding: 10px 16px; border-radius: 12px; background: var(--bg-2); font-size: 15px; font-weight: 600; white-space: nowrap; }
+    .arr { color: var(--mute); font-weight: 700; }
+    .node.wait { background: var(--amber-tint); color: var(--amber); }
+    .node.bad { background: var(--red-tint); color: var(--red); }
+    .node.good { background: var(--green-tint); color: var(--green); }
+    .node.fast { background: #e9eeff; color: var(--blue); }
+    .lane.new { border-color: #cfe8d9; box-shadow: 0 10px 30px rgba(25,138,76,.08); }
+    .timer { margin-left: auto; font-family: var(--mono); font-size: 13px; padding: 6px 10px; border-radius: 8px; border: 1px dashed currentColor; }
+    .lane.old .timer { color: var(--amber); }
+    .lane.new .timer { color: var(--green); }
+
+    /* 2. human vs AI */
+    .tabs { display: inline-flex; flex-wrap: wrap; gap: 6px; padding: 6px; margin: 40px 0 22px; background: var(--card); border: 1px solid var(--line); border-radius: 14px; }
+    .tabs button { border: 0; background: none; padding: 10px 16px; border-radius: 10px; font: 600 15px/1.2 'Be Vietnam Pro', sans-serif; color: var(--ink-2); cursor: pointer; display: inline-flex; gap: 8px; align-items: center; }
+    .tabs button[aria-selected="true"] { background: var(--ink); color: #fff; }
+    .tabs button .dot { width: 8px; height: 8px; border-radius: 50%; }
+    .view { display: grid; grid-template-columns: 1.35fr 1fr; gap: 28px; align-items: center; }
+    .view[hidden] { display: none; }
+    .frame { border-radius: 16px; overflow: hidden; border: 1px solid var(--line); background: var(--card); box-shadow: 0 30px 60px -30px rgba(20,22,27,.35); }
+    .frame-bar { display: flex; gap: 6px; align-items: center; padding: 10px 14px; background: var(--bg-2); border-bottom: 1px solid var(--line); font-family: var(--mono); font-size: 12px; color: var(--mute); }
+    .frame-bar i { width: 10px; height: 10px; border-radius: 50%; background: #d9d4c7; }
+    .frame-bar span { margin-left: 10px; }
+    .frame img { display: block; width: 100%; height: auto; }
+    pre.code { margin: 0; padding: 22px 22px 26px; background: #11131a; color: #b9c0cf; font: 400 13.5px/1.75 var(--mono); overflow-x: auto; white-space: pre; }
+    pre.code .t { color: #ff9b85; }
+    pre.code .c { color: #6f7a90; }
+    pre.code .hl { background: rgba(255, 210, 122, .14); color: #ffd27a; border-radius: 4px; padding: 1px 4px; }
+    .readable { padding: 22px 24px 26px; font-size: 15px; line-height: 1.65; }
+    .readable h4 { margin: 0 0 2px; font-size: 17px; }
+    .readable .meta { color: var(--mute); font-size: 13px; margin-bottom: 14px; }
+    .readable ul { margin: 6px 0 14px; padding-left: 18px; }
+    .readable li::marker { color: var(--red); }
+    .readable .k { font-weight: 700; }
+    .says { display: grid; gap: 14px; }
+    .bubble { position: relative; padding: 20px 22px; border-radius: 20px; background: var(--card); border: 1px solid var(--line); font-size: 17px; }
+    .bubble .who { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 700; color: var(--mute); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 8px; }
+    .bubble .who i { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 8px; background: var(--ink); color: #fff; font-style: normal; font-size: 11px; letter-spacing: 0; }
+    .bubble.sad { border-color: #f3c7cf; background: #fff8f9; }
+    .bubble.happy { border-color: #cfe8d9; background: #f7fcf9; }
+    .verdict { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; font-size: 15px; }
+    .verdict.bad { color: var(--red); }
+    .verdict.good { color: var(--green); }
+    .honest { margin-top: 26px; padding: 16px 20px; border-left: 4px solid var(--amber); background: var(--amber-tint); border-radius: 0 12px 12px 0; font-size: 16px; }
+
+    /* 3. plan */
+    .plan { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 52px; }
+    .plan::before { content: ''; position: absolute; left: 8%; right: 8%; top: 34px; height: 2px; background: repeating-linear-gradient(90deg, var(--line) 0 10px, transparent 10px 18px); }
+    .step { position: relative; display: flex; flex-direction: column; gap: 14px; padding: 26px 24px 24px; border-radius: 22px; background: var(--card); border: 1px solid var(--line); }
+    .step-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+    .step-n { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 16px; background: var(--ink); color: #fff; font-weight: 800; font-size: 20px; }
+    .step:first-child .step-n { background: var(--red); }
+    .status { font-size: 12px; font-weight: 700; padding: 5px 10px; border-radius: 999px; text-align: right; }
+    .status.now { background: var(--red-tint); color: var(--red); }
+    .status.next { background: #e9eeff; color: var(--blue); }
+    .status.later { background: var(--bg-2); color: var(--ink-2); }
+    .step h3 { font-size: 23px; }
+    .analogy { font-size: 16px; color: var(--ink-2); font-style: italic; padding-left: 14px; border-left: 3px solid var(--line); }
+    .gets { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; font-size: 15px; }
+    .gets li { display: grid; grid-template-columns: 22px 1fr; gap: 8px; }
+    .gets .ico { color: var(--green); margin-top: 3px; }
+    .cost { margin-top: auto; padding-top: 12px; border-top: 1px dashed var(--line); font-size: 14px; color: var(--ink-2); }
+    .cost b { color: var(--ink); }
+    details.tech { font-size: 14px; color: var(--ink-2); }
+    details.tech summary { cursor: pointer; font-weight: 600; color: var(--mute); list-style: none; display: inline-flex; gap: 6px; align-items: center; }
+    details.tech summary::-webkit-details-marker { display: none; }
+    details.tech summary::before { content: '+'; display: grid; place-items: center; width: 18px; height: 18px; border-radius: 5px; border: 1px solid var(--line); font-size: 12px; }
+    details.tech[open] summary::before { content: '−'; }
+    details.tech p { margin-top: 8px; font-family: var(--mono); font-size: 12.5px; line-height: 1.6; }
+
+    /* 4. assistant demo */
+    .demo { display: grid; grid-template-columns: 400px 1fr; gap: 48px; align-items: start; margin-top: 48px; }
+    .phone { position: relative; border-radius: 40px; padding: 14px; background: #0d0f14; box-shadow: 0 40px 80px -30px rgba(12,20,48,.55), inset 0 0 0 2px #2a2e38; }
+    .screen { border-radius: 28px; overflow: hidden; background: #f4f5f8; height: 640px; display: flex; flex-direction: column; }
+    .screen-top { display: flex; align-items: center; gap: 12px; padding: 18px 18px 14px; background: #fff; border-bottom: 1px solid #e8e9ee; }
+    .screen-top .av { width: 38px; height: 38px; border-radius: 12px; display: grid; place-items: center; color: #fff; font-size: 12px; font-weight: 800; }
+    .screen-top b { display: block; font-size: 15px; line-height: 1.2; }
+    .screen-top small { font-size: 12px; color: var(--green); font-weight: 600; }
+    .screen-top .time { margin-left: auto; font-family: var(--mono); font-size: 12px; color: var(--mute); }
+    .chat { flex: 1; overflow-y: auto; scrollbar-width: none; padding: 16px 14px 20px; display: flex; flex-direction: column; gap: 10px; scroll-behavior: smooth; }
+    .msg { max-width: 86%; padding: 11px 14px; border-radius: 18px; font-size: 14.5px; line-height: 1.5; position: relative; transition: opacity .35s, transform .35s; }
+    .msg.u { align-self: flex-end; background: var(--night-2); color: #fff; border-bottom-right-radius: 6px; }
+    .msg.b { align-self: flex-start; background: #fff; border: 1px solid #e3e5ea; border-bottom-left-radius: 6px; }
+    .msg ul { margin: 6px 0; padding-left: 18px; }
+    .msg .tagn { position: absolute; top: -9px; right: -9px; display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: var(--red); color: #fff; font-size: 11px; font-weight: 800; box-shadow: 0 0 0 3px #f4f5f8; }
+    .msg.u .tagn { right: auto; left: -9px; }
+    .chat.play .msg.pending { display: none; }
+    .typing { align-self: flex-start; display: inline-flex; gap: 4px; padding: 12px 14px; border-radius: 18px; background: #fff; border: 1px solid #e3e5ea; }
+    .typing i { width: 7px; height: 7px; border-radius: 50%; background: #b7bcc7; animation: bounce 1s infinite; }
+    .typing i:nth-child(2) { animation-delay: .15s; }
+    .typing i:nth-child(3) { animation-delay: .3s; }
+    @keyframes bounce { 40% { transform: translateY(-5px); background: #7b8291; } }
+    .notes { display: grid; gap: 14px; }
+    .anno { display: grid; grid-template-columns: 34px 1fr; gap: 14px; align-items: start; padding: 16px 18px; border-radius: 16px; background: var(--card); border: 1px solid var(--line); transition: border-color .3s, box-shadow .3s; }
+    .anno.lit { border-color: var(--red); box-shadow: 0 10px 26px -14px rgba(215,31,58,.45); }
+    .anno .n { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--red); color: #fff; font-weight: 800; font-size: 13px; }
+    .anno b { display: block; font-size: 16px; }
+    .anno p { font-size: 15px; color: var(--ink-2); }
+    .lead-card { margin-top: 10px; border-radius: 18px; border: 1px solid #cfe8d9; background: var(--card); overflow: hidden; transition: opacity .6s, transform .6s; }
+    .lead-card.hidden { opacity: .25; transform: translateY(8px); filter: grayscale(1); }
+    .lead-head { display: flex; align-items: center; gap: 10px; padding: 12px 18px; background: var(--green-tint); color: var(--green); font-weight: 700; font-size: 14px; }
+    .lead-head .time { margin-left: auto; font-family: var(--mono); font-weight: 500; }
+    .lead-body { padding: 14px 18px 18px; display: grid; gap: 8px; font-size: 15px; }
+    .lead-body div { display: grid; grid-template-columns: 110px 1fr; gap: 10px; }
+    .lead-body dt { color: var(--mute); font-size: 13px; padding-top: 2px; }
+    .lead-body dd { margin: 0; font-weight: 600; }
+    .replay { display: inline-flex; align-items: center; gap: 8px; margin-top: 16px; padding: 10px 16px; border-radius: 10px; border: 1px solid var(--line); background: var(--card); font: 600 14px/1 'Be Vietnam Pro', sans-serif; cursor: pointer; }
+    .replay:hover { border-color: var(--ink); }
+
+    /* 5. rules */
+    .rules { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 44px; }
+    .rule { padding: 24px 22px; border-radius: 20px; background: var(--card); border: 1px solid var(--line); }
+    .rule .x { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 12px; background: var(--red-tint); color: var(--red); margin-bottom: 16px; }
+    .rule h3 { font-size: 19px; margin-bottom: 8px; }
+    .rule p { font-size: 15px; color: var(--ink-2); }
+
+    /* 6. faq */
+    .faq { margin-top: 36px; border-top: 1px solid var(--line); }
+    .faq details { border-bottom: 1px solid var(--line); }
+    .faq summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; gap: 20px; padding: 22px 0; font-size: 19px; font-weight: 700; }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary::after { content: '+'; flex: none; display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--line); font-weight: 500; transition: transform .25s; }
+    .faq details[open] summary::after { transform: rotate(45deg); }
+    .faq details p { padding: 0 0 24px; color: var(--ink-2); max-width: 720px; }
+
+    /* 7. decisions */
+    .decide { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+    .checks { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; counter-reset: c; }
+    .checks li { counter-increment: c; display: grid; grid-template-columns: 44px 1fr; gap: 14px; align-items: start; padding: 18px 20px; border-radius: 16px; background: var(--card); border: 1px solid var(--line); }
+    .checks li::before { content: counter(c); display: grid; place-items: center; width: 40px; height: 40px; border-radius: 12px; background: var(--ink); color: #fff; font-weight: 800; }
+    .checks b { display: block; font-size: 17px; }
+    .checks span { font-size: 15px; color: var(--ink-2); }
+    .cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+    .btn { display: inline-flex; align-items: center; gap: 10px; padding: 15px 22px; border-radius: 12px; font-weight: 700; text-decoration: none; border: 1px solid transparent; }
+    .btn-red { background: var(--red); color: #fff; box-shadow: 0 10px 24px -10px rgba(215,31,58,.6); }
+    .btn-line { border-color: var(--line); background: var(--card); }
+    .btn:hover { transform: translateY(-1px); }
+
+    footer { padding: 40px 0 56px; border-top: 1px solid var(--line); color: var(--mute); font-size: 14px; }
+    footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px 24px; }
+    footer a { color: var(--ink-2); }
+
+    @media (max-width: 980px) {
+      .hero-in { grid-template-columns: 1fr; gap: 40px; }
+      .night { max-width: 420px; justify-self: start; }
+      .moon { right: 10px; }
+      .view { grid-template-columns: 1fr; }
+      .plan { grid-template-columns: 1fr; }
+      .plan::before { display: none; }
+      .demo { grid-template-columns: 1fr; }
+      .phone { max-width: 400px; width: 100%; justify-self: center; }
+      .rules { grid-template-columns: 1fr 1fr; }
+      .decide { grid-template-columns: 1fr; gap: 28px; }
+    }
+    @media (max-width: 640px) {
+      body { font-size: 16px; }
+      .wrap { padding: 0 16px; }
+      .hero { padding: 104px 0 80px; }
+      .hero .sub { font-size: 17px; }
+      .clock { font-size: 72px; }
+      section.s { padding: 72px 0; }
+      .lead { font-size: 17px; }
+      .stat { grid-template-columns: 1fr; gap: 10px; padding: 22px; }
+      .lane { grid-template-columns: 1fr; gap: 12px; padding: 18px; }
+      .node { white-space: normal; font-size: 14px; padding: 8px 12px; }
+      .timer { margin-left: 0; }
+      .tabs { display: grid; width: 100%; }
+      .rules { grid-template-columns: 1fr; }
+      .screen { height: 600px; }
+      .faq summary { font-size: 17px; }
+      .lead-body div { grid-template-columns: 1fr; gap: 0; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+    @media (max-width: 640px) { .lang button { padding: 10px 14px; } details.tech summary { padding: 10px 0; } .stat small a { display: inline-block; padding: 6px 0; } }
+  </style>
+</head>
+<body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
+    <symbol id="i-cloud" viewBox="0 0 24 24"><path d="M7 18a4.5 4.5 0 0 1-.6-9 6 6 0 0 1 11.5 1.5A3.8 3.8 0 0 1 17.5 18z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+    <symbol id="i-replay" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.4-5.7M4 4v4h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  </svg>
+
+  <header class="top">
+    <div class="wrap top-in">
+      <a class="back" href="../"><i>GRC</i><span class="vi">Về trang demo</span><span class="en">Back to the demo</span></a>
+      <div class="lang" role="group" aria-label="Language"><button type="button" data-l="vi" aria-pressed="true">VI</button><button type="button" data-l="en" aria-pressed="false">EN</button></div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="stars" aria-hidden="true"></div>
+    <div class="wrap hero-in">
+      <div>
+        <span class="chip"><span class="vi">Đọc trong 3 phút · Dành cho ban giám đốc GRC VN</span><span class="en">3-minute read · For GRC VN leadership</span></span>
+        <h1><span class="vi">Một website biết trả lời — <em>kể cả lúc 2 giờ sáng.</em></span><span class="en">A website that answers — <em>even at 2 a.m.</em></span></h1>
+        <p class="sub vi">Khách hàng ngày nay hỏi AI trước khi gọi cho nhà cung cấp. Đây là kế hoạch để GRC VN được AI hiểu và giới thiệu — và để không khách hàng nào phải ngồi chờ.</p>
+        <p class="sub en">Buyers now ask AI before they call a supplier. This is the plan for GRC VN to be understood and recommended by AI — and for no customer to be left waiting.</p>
+        <a class="scroll-cue" href="#changed"><span></span><b class="vi">Kéo xuống để xem</b><b class="en">Scroll to read</b></a>
+      </div>
+      <div class="night" aria-hidden="true">
+        <div class="moon"></div>
+        <p class="clock">02:14<small class="vi">Thứ Ba · ngoài giờ làm việc</small><small class="en">Tuesday · after hours</small></p>
+        <div class="notif">
+          <div class="note"><span class="av user">KH</span><div><b class="vi">Khách hàng</b><b class="en">Customer</b><p class="vi">Bên mình cần 20 máy tính bảng cho đội sửa đường dây, hay làm dưới mưa…</p><p class="en">We need 20 tablets for a power-line crew that often works in the rain…</p></div></div>
+          <div class="note"><span class="av bot">AI</span><div><b class="vi">Trợ lý GRC VN</b><b class="en">GRC VN assistant</b><p class="vi">Có 2 lựa chọn phù hợp: Getac UX10 và Getac F120. Anh/chị ưu tiên gọn nhẹ hay màn hình lớn?</p><p class="en">Two good fits: Getac UX10 and Getac F120. Do you prefer lighter or a bigger screen?</p></div></div>
+          <div class="note"><span class="av ok"><svg class="ico"><use href="#i-check"/></svg></span><div><b class="vi">Đã chuyển cho Sales</b><b class="en">Sent to Sales</b><p class="vi">Yêu cầu đầy đủ, sẵn sàng gọi lại lúc 8 giờ sáng.</p><p class="en">Complete request, ready for an 8 a.m. call-back.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 1. WHAT CHANGED -->
+  <section class="s" id="changed">
+    <div class="wrap">
+      <div class="narrow reveal">
+        <p class="eyebrow"><b>1</b><span class="vi">Điều gì đã thay đổi?</span><span class="en">What changed?</span></p>
+        <h2 class="vi">Khách hàng không còn bắt đầu bằng Google. Họ bắt đầu bằng một câu hỏi cho AI.</h2>
+        <h2 class="en">Buyers no longer start with Google. They start by asking an AI.</h2>
+        <p class="lead vi">Trước khi liên hệ nhà cung cấp, người mua hỏi ChatGPT, Claude, Gemini hay Perplexity: “Mua máy tính bảng siêu bền ở Việt Nam ở đâu?”. AI đọc các website rồi trả lời — và chỉ giới thiệu những nơi nó đọc hiểu được.</p>
+        <p class="lead en">Before contacting a supplier, buyers ask ChatGPT, Claude, Gemini or Perplexity: “Where can I buy rugged tablets in Vietnam?”. The AI reads websites and answers — and it only recommends the ones it can understand.</p>
+      </div>
+      <div class="stat reveal">
+        <p class="stat-n">89%</p>
+        <div>
+          <p class="vi">người mua B2B đã dùng AI tạo sinh, và coi đó là một trong những nguồn thông tin hàng đầu ở mọi giai đoạn mua hàng.</p>
+          <p class="en">of B2B buyers have adopted generative AI, naming it a top source of information in every phase of buying.</p>
+          <small>Forrester, Buyers’ Journey Survey 2024 — <a href="https://www.forrester.com/blogs/the-future-of-b2b-buying-will-come-slowly-and-then-all-at-once" target="_blank" rel="noopener">forrester.com</a></small>
+        </div>
+      </div>
+      <div class="lanes">
+        <div class="lane old reveal">
+          <p class="lane-name"><span class="vi">Cách cũ</span><span class="en">The old way</span><small class="vi">Để lại số rồi chờ</small><small class="en">Leave a number and wait</small></p>
+          <div class="steps-row">
+            <span class="node"><span class="vi">Tìm trên Google</span><span class="en">Search Google</span></span><span class="arr">→</span>
+            <span class="node"><span class="vi">Điền form liên hệ</span><span class="en">Fill in a form</span></span><span class="arr">→</span>
+            <span class="node wait"><span class="vi">Chờ 1–2 ngày</span><span class="en">Wait 1–2 days</span></span><span class="arr">→</span>
+            <span class="node bad"><span class="vi">Khách đã hỏi bên khác</span><span class="en">Buyer already asked a rival</span></span>
+          </div>
+        </div>
+        <div class="lane new reveal">
+          <p class="lane-name"><span class="vi">Cách mới</span><span class="en">The new way</span><small class="vi">Được trả lời ngay</small><small class="en">Answered right away</small></p>
+          <div class="steps-row">
+            <span class="node fast"><span class="vi">Hỏi AI hoặc chat trên web</span><span class="en">Ask an AI or the site</span></span><span class="arr">→</span>
+            <span class="node fast"><span class="vi">Được tư vấn ngay, 24/7</span><span class="en">Instant advice, 24/7</span></span><span class="arr">→</span>
+            <span class="node good"><span class="vi">Sales gọi lại với báo giá đúng</span><span class="en">Sales calls back with the right quote</span></span>
+            <span class="timer"><span class="vi">~2 phút</span><span class="en">~2 min</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. HUMAN VS AI -->
+  <section class="s s-alt" id="see">
+    <div class="wrap">
+      <div class="narrow reveal">
+        <p class="eyebrow"><b>2</b><span class="vi">Vấn đề</span><span class="en">The problem</span></p>
+        <h2 class="vi">Người xem thấy một website đẹp. AI thì thấy gần như một trang trắng.</h2>
+        <h2 class="en">People see a beautiful website. An AI sees an almost blank page.</h2>
+        <p class="lead vi">Trình duyệt của người dùng tự “lắp ráp” trang web từ các mảnh. Phần lớn AI không làm bước này — chúng chỉ đọc bản gốc. Bấm vào ba nút dưới đây để so sánh.</p>
+        <p class="lead en">A visitor’s browser assembles the page from pieces. Most AI tools skip that step and read only the raw page. Tap the three buttons below to compare.</p>
+      </div>
+      <div class="tabs" role="tablist" aria-label="Views">
+        <button type="button" role="tab" aria-selected="true" aria-controls="v-human" data-tab="v-human"><span class="dot" style="background:#2f5bff"></span><span class="vi">Người xem thấy</span><span class="en">What people see</span></button>
+        <button type="button" role="tab" aria-selected="false" aria-controls="v-ai" data-tab="v-ai"><span class="dot" style="background:#d71f3a"></span><span class="vi">AI thấy hôm nay</span><span class="en">What AI sees today</span></button>
+        <button type="button" role="tab" aria-selected="false" aria-controls="v-after" data-tab="v-after"><span class="dot" style="background:#198a4c"></span><span class="vi">AI thấy sau Bước 1</span><span class="en">What AI sees after Step 1</span></button>
+      </div>
+
+      <div class="view" id="v-human" role="tabpanel">
+        <div class="frame"><div class="frame-bar"><i></i><i></i><i></i><span>grcvn.vxid.io/v1/</span></div><img src="../assets/thumbs/v1.webp" alt="Website demo — phương án A" width="960" height="600" loading="lazy"></div>
+        <div class="says">
+          <div class="bubble"><p class="who"><i>KH</i><span class="vi">Khách hàng</span><span class="en">Customer</span></p><p class="vi">“Đẹp, rõ ràng. Có B360, UX10, máy chủ MiTAC, có số điện thoại.”</p><p class="en">“Looks great. B360, UX10, MiTAC servers, a phone number.”</p></div>
+          <p class="verdict good"><svg class="ico"><use href="#i-check"/></svg><span class="vi">Tốt cho người</span><span class="en">Works for people</span></p>
+        </div>
+      </div>
+
+      <div class="view" id="v-ai" role="tabpanel" hidden>
+        <div class="frame"><div class="frame-bar"><i></i><i></i><i></i><span class="vi">bản gốc mà AI đọc</span><span class="en">the raw page an AI reads</span></div>
+<pre class="code"><span class="t">&lt;title&gt;</span>General Resources Vietnam | Máy tính siêu bền…<span class="t">&lt;/title&gt;</span>
+<span class="t">&lt;meta</span> description="Cung cấp, cấu hình và triển khai…"<span class="t">&gt;</span>
+
+<span class="t">&lt;body&gt;</span>
+  <span class="hl">&lt;div id="app"&gt;&lt;/div&gt;</span>   <span class="c">← toàn bộ sản phẩm đáng lẽ ở đây</span>
+  <span class="c">… 028 2260 7766 — Phòng 201, The Galleria Metro 6 …</span>
+<span class="t">&lt;/body&gt;</span></pre></div>
+        <div class="says">
+          <div class="bubble sad"><p class="who"><i>AI</i><span class="vi">AI đọc trang</span><span class="en">AI reading the page</span></p><p class="vi">“Tôi thấy tên công ty, số điện thoại và địa chỉ. Tôi không thấy sản phẩm, thông số hay lĩnh vực nào — nên tôi sẽ không giới thiệu công ty này.”</p><p class="en">“I see a company name, a phone number and an address. I see no products, specs or industries — so I won’t recommend this company.”</p></div>
+          <p class="verdict bad"><svg class="ico"><use href="#i-x"/></svg><span class="vi">AI bỏ qua GRC VN</span><span class="en">AI passes GRC VN by</span></p>
+        </div>
+      </div>
+
+      <div class="view" id="v-after" role="tabpanel" hidden>
+        <div class="frame"><div class="frame-bar"><i></i><i></i><i></i><span class="vi">bản gốc sau Bước 1</span><span class="en">the raw page after Step 1</span></div>
+          <div class="readable">
+            <h4>General Resources Vietnam</h4>
+            <p class="meta">Công ty TNHH General Resources Vietnam · MST 0314380088 · TP. Hồ Chí Minh</p>
+            <p><span class="k vi">Cung cấp:</span><span class="k en">Supplies:</span> <span class="vi">máy tính siêu bền Getac, máy chủ MiTAC</span><span class="en">Getac rugged computers, MiTAC servers</span></p>
+            <ul>
+              <li>Getac UX10 G5 — <span class="vi">máy tính bảng 10,1" · IP66 · rơi 1,8 m · 1,15 kg</span><span class="en">10.1" tablet · IP66 · 1.8 m drop · 1.15 kg</span></li>
+              <li>Getac B360 G3 — <span class="vi">laptop 13,3" · IP66 · 1.400 nits</span><span class="en">13.3" laptop · IP66 · 1,400 nits</span></li>
+              <li>MiTAC G4826Z5 — <span class="vi">máy chủ AI 4U · 8× AMD Instinct MI355X</span><span class="en">4U AI server · 8× AMD Instinct MI355X</span></li>
+              <li><span class="vi">… và 8 sản phẩm khác, mỗi sản phẩm một trang riêng</span><span class="en">… plus 8 more, each with its own page</span></li>
+            </ul>
+            <p><span class="k vi">Lĩnh vực:</span><span class="k en">Industries:</span> <span class="vi">quốc phòng, an toàn công cộng, đường sắt, điện nước, sản xuất, dầu khí</span><span class="en">defense, public safety, rail, utilities, manufacturing, oil &amp; gas</span></p>
+            <p><span class="k vi">Liên hệ:</span><span class="k en">Contact:</span> 028 2260 7766 · <span class="vi">Yêu cầu báo giá trực tuyến</span><span class="en">Online quote request</span></p>
+          </div>
+        </div>
+        <div class="says">
+          <div class="bubble happy"><p class="who"><i>AI</i><span class="vi">AI đọc trang</span><span class="en">AI reading the page</span></p><p class="vi">“Rõ ràng. Khi ai đó hỏi về máy tính bảng siêu bền hay máy chủ AI tại Việt Nam, tôi có thể giới thiệu General Resources Vietnam kèm sản phẩm phù hợp.”</p><p class="en">“Clear. When someone asks about rugged tablets or AI servers in Vietnam, I can recommend General Resources Vietnam with the right product.”</p></div>
+          <p class="verdict good"><svg class="ico"><use href="#i-check"/></svg><span class="vi">AI hiểu và giới thiệu GRC VN</span><span class="en">AI understands and recommends GRC VN</span></p>
+        </div>
+      </div>
+
+      <p class="honest reveal"><span class="vi"><b>Nói thẳng:</b> bản demo hiện tại đang ở trạng thái thứ hai — đẹp với người, nhưng AI chưa đọc được. Bước 1 bên dưới sửa điều này mà không thay đổi giao diện.</span><span class="en"><b>To be upfront:</b> today’s demo is in the second state — great for people, unreadable for AI. Step 1 below fixes that without changing the design.</span></p>
+    </div>
+  </section>
+
+  <!-- 3. PLAN -->
+  <section class="s" id="plan">
+    <div class="wrap">
+      <div class="narrow reveal">
+        <p class="eyebrow"><b>3</b><span class="vi">Kế hoạch</span><span class="en">The plan</span></p>
+        <h2 class="vi">Ba bước, làm lần lượt — mỗi bước đều có ích ngay.</h2>
+        <h2 class="en">Three steps, one at a time — each one pays off on its own.</h2>
+      </div>
+      <div class="plan">
+        <article class="step reveal">
+          <div class="step-top"><span class="step-n">1</span><span class="status now"><span class="vi">Làm ngay</span><span class="en">Now</span></span></div>
+          <h3 class="vi">Cho AI đọc được website</h3><h3 class="en">Make the site readable by AI</h3>
+          <p class="analogy vi">Như đặt sẵn một cuốn catalog ngay trước cửa: ai đi ngang cũng đọc được, không cần chờ ai mở cửa.</p>
+          <p class="analogy en">Like leaving a printed catalogue at the front door: anyone passing by can read it without waiting for someone to open up.</p>
+          <ul class="gets">
+            <li><svg class="ico"><use href="#i-check"/></svg><span class="vi">ChatGPT, Claude, Perplexity… có đủ thông tin để nhắc tới GRC VN</span><span class="en">ChatGPT, Claude, Perplexity… have enough to mention GRC VN</span></li>
+            <li><svg class="ico"><use href="#i-check"/></svg><span class="vi">Google hiểu website tốt hơn, dễ lên kết quả tìm kiếm</span><span class="en">Google understands the site better too</span></li>
+            <li><svg class="ico"><use href="#i-check"/></svg><span class="vi">Giao diện giữ nguyên</span><span class="en">The design stays the same</span></li>
+          </ul>
+          <p class="cost"><b class="vi">Chi phí:</b><b class="en">Cost:</b> <span class="vi">nằm trong phần làm website.</span><span class="en">part of building the website.</span></p>
+          <details class="tech"><summary><span class="vi">Chi tiết kỹ thuật</span><span class="en">Technical details</span></summary><p>Pre-rendered HTML · schema.org Product/Organization JSON-LD · llms.txt · public catalog.json · one generated page per product · sitemap · robots.txt allows reputable AI crawlers.</p></details>
+        </article>
+        <article class="step reveal">
+          <div class="step-top"><span class="step-n">2</span><span class="status next"><span class="vi">Sau khi chốt thiết kế</span><span class="en">After the design is chosen</span></span></div>
+          <h3 class="vi">Trợ lý trực 24/7 trên website</h3><h3 class="en">A 24/7 assistant on the site</h3>
+          <p class="analogy vi">Như một lễ tân thuộc lòng mọi thông số, không bao giờ ngủ, và sáng ra đặt sẵn yêu cầu rõ ràng lên bàn sales.</p>
+          <p class="analogy en">Like a receptionist who knows every spec by heart, never sleeps, and leaves a clear request on the sales desk each morning.</p>
+          <ul class="gets">
+            <li><svg class="ico"><use href="#i-check"/></svg><span class="vi">Khách được tư vấn ngay, tiếng Việt hoặc tiếng Anh</span><span class="en">Instant advice in Vietnamese or English</span></li>
+            <li><svg class="ico"><use href="#i-check"/></svg><span class="vi">Gợi ý đúng thiết bị cho đúng công việc</span><span class="en">The right device for the job</span></li>
+            <li><svg class="ico"><use href="#i-check"/></svg><span class="vi">Sales nhận yêu cầu đầy đủ qua Zalo hoặc email</span><span class="en">Sales gets complete requests via Zalo or email</span></li>
+          </ul>
+          <p class="cost"><b class="vi">Chi phí:</b><b class="en">Cost:</b> <span class="vi">trả theo lượt dùng AI, thường thấp với lượng khách B2B. Chạy thử 1 tháng để đo thực tế trước khi quyết định.</span><span class="en">pay-per-use AI, usually low at B2B traffic levels. A one-month trial measures the real cost before committing.</span></p>
+          <details class="tech"><summary><span class="vi">Chi tiết kỹ thuật</span><span class="en">Technical details</span></summary><p>Claude API answering only from the approved content file · conversation log for review · lead hand-off to Zalo/email · consent before collecting contact details · hosted on Cloudflare Workers.</p></details>
+        </article>
+        <article class="step reveal">
+          <div class="step-top"><span class="step-n">3</span><span class="status later"><span class="vi">Khi có nhu cầu</span><span class="en">When there’s demand</span></span></div>
+          <h3 class="vi">Cửa riêng cho “trợ lý ảo” của khách</h3><h3 class="en">A door for customers’ AI agents</h3>
+          <p class="analogy vi">Như mở thêm một quầy giao dịch dành riêng cho trợ lý ảo của phòng mua hàng: chúng tự tra sản phẩm và gửi yêu cầu.</p>
+          <p class="analogy en">Like opening a dedicated counter for purchasing departments’ AI assistants: they look up products and send requests themselves.</p>
+          <ul class="gets">
+            <li><svg class="ico"><use href="#i-check"/></svg><span class="vi">Khách hàng lớn tra cứu và gửi yêu cầu báo giá tự động</span><span class="en">Large buyers look up products and request quotes automatically</span></li>
+            <li><svg class="ico"><use href="#i-check"/></svg><span class="vi">Đi trước đối thủ khi xu hướng này phổ biến</span><span class="en">Ahead of rivals as this becomes common</span></li>
+          </ul>
+          <p class="cost"><b class="vi">Chi phí:</b><b class="en">Cost:</b> <span class="vi">nhỏ — chỉ làm khi thấy có nhu cầu thật.</span><span class="en">small — built only once real demand shows up.</span></p>
+          <details class="tech"><summary><span class="vi">Chi tiết kỹ thuật</span><span class="en">Technical details</span></summary><p>MCP server / open API: search_products, get_product, request_quote · rate limits and audit log.</p></details>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. ASSISTANT DEMO -->
+  <section class="s s-alt" id="assistant">
+    <div class="wrap">
+      <div class="narrow reveal">
+        <p class="eyebrow"><b>4</b><span class="vi">Trợ lý 24/7 trông như thế nào?</span><span class="en">What does the 24/7 assistant look like?</span></p>
+        <h2 class="vi">Một cuộc trò chuyện lúc 2 giờ sáng — và điều sales nhận được lúc 7 giờ 30.</h2>
+        <h2 class="en">A conversation at 2 a.m. — and what sales receives at 7:30.</h2>
+        <p class="lead vi">Đây là ví dụ minh họa. Các số đỏ trên tin nhắn tương ứng với ghi chú bên cạnh.</p>
+        <p class="lead en">An illustrative example. The red numbers on the messages match the notes alongside.</p>
+      </div>
+      <div class="demo">
+        <div class="phone reveal">
+          <div class="screen">
+            <div class="screen-top"><span class="av" style="background:var(--red)">GRC</span><div><b class="vi">Trợ lý GRC VN</b><b class="en">GRC VN assistant</b><small class="vi">● Đang trực tuyến</small><small class="en">● Online now</small></div><span class="time">02:14</span></div>
+            <div class="chat" id="chat">
+              <div class="msg u" data-n="1"><span class="tagn">1</span><span class="vi">Chào bạn, bên mình cần khoảng 20 máy tính bảng cho đội sửa đường dây điện. Làm ngoài trời, hay mưa, cần có 4G.</span><span class="en">Hi, we need about 20 tablets for a power-line repair crew. Outdoor work, lots of rain, must have 4G.</span></div>
+              <div class="msg b" data-n="2"><span class="tagn">2</span><span class="vi">Chào anh/chị! Với điều kiện đó có 2 lựa chọn phù hợp:<ul><li><b>Getac UX10</b> — 10,1", chỉ 1,15 kg, chuẩn IP66 chịu tia nước mạnh, rơi 1,8 m vẫn chạy.</li><li><b>Getac F120</b> — màn hình 12,2" sáng 1.200 nits, đọc rõ dưới nắng.</li></ul>Anh/chị ưu tiên gọn nhẹ hay màn hình lớn?</span><span class="en">Hello! Two good fits for those conditions:<ul><li><b>Getac UX10</b> — 10.1", only 1.15 kg, IP66 against strong water jets, keeps working after a 1.8 m drop.</li><li><b>Getac F120</b> — 12.2" screen at 1,200 nits, readable in direct sun.</li></ul>Do you prefer lighter, or a bigger screen?</span></div>
+              <div class="msg u"><span class="vi">Gọn nhẹ. Giá khoảng bao nhiêu vậy?</span><span class="en">Lighter. Roughly how much?</span></div>
+              <div class="msg b" data-n="3"><span class="tagn">3</span><span class="vi">Giá phụ thuộc cấu hình và số lượng, nên em không báo giá tự động để tránh sai lệch. Kỹ sư GRC VN sẽ gửi báo giá chính xác trong 1 ngày làm việc.</span><span class="en">Pricing depends on configuration and quantity, so I don’t quote automatically. A GRC VN engineer will send an exact quote within one business day.</span></div>
+              <div class="msg b" data-n="4"><span class="tagn">4</span><span class="vi">Anh/chị cho em xin tên, công ty và số Zalo nhé? Thông tin chỉ dùng để liên hệ tư vấn.</span><span class="en">May I have your name, company and Zalo number? It’s only used to follow up on this request.</span></div>
+              <div class="msg u"><span class="vi">Minh, Công ty Điện ABC, 09xx xxx 168</span><span class="en">Minh, ABC Power Co., 09xx xxx 168</span></div>
+              <div class="msg b" data-n="5"><span class="tagn">5</span><span class="vi">Cảm ơn anh/chị Minh! Em đã chuyển yêu cầu cho kỹ sư và gửi email tóm tắt kèm thông số UX10.</span><span class="en">Thanks, Minh! I’ve passed this to an engineer and emailed you a summary with the UX10 specs.</span></div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="notes">
+            <div class="anno reveal" data-anno="1"><span class="n">1</span><div><b class="vi">Khách hỏi lúc 2 giờ sáng</b><b class="en">A customer asks at 2 a.m.</b><p class="vi">Không ai trực, nhưng khách vẫn được trả lời ngay.</p><p class="en">Nobody is on duty, yet the customer gets an answer right away.</p></div></div>
+            <div class="anno reveal" data-anno="2"><span class="n">2</span><div><b class="vi">Gợi ý từ thông số chính hãng</b><b class="en">Suggestions from official specs</b><p class="vi">Trợ lý chỉ dùng dữ liệu đã được GRC VN duyệt.</p><p class="en">The assistant only uses data GRC VN has approved.</p></div></div>
+            <div class="anno reveal" data-anno="3"><span class="n">3</span><div><b class="vi">Không tự báo giá</b><b class="en">No automatic pricing</b><p class="vi">Giá luôn do kỹ sư gửi — tránh sai lệch, giữ chính sách giá.</p><p class="en">Prices always come from an engineer — no mistakes, pricing policy protected.</p></div></div>
+            <div class="anno reveal" data-anno="4"><span class="n">4</span><div><b class="vi">Xin phép trước khi ghi nhận</b><b class="en">Asks before recording</b><p class="vi">Đúng tinh thần Luật Bảo vệ dữ liệu cá nhân.</p><p class="en">In line with Vietnam’s personal-data protection law.</p></div></div>
+            <div class="anno reveal" data-anno="5"><span class="n">5</span><div><b class="vi">Chuyển cho người thật</b><b class="en">Handed to a real person</b><p class="vi">Khách nhận tóm tắt ngay; sales nhận yêu cầu đầy đủ.</p><p class="en">The customer gets a summary now; sales gets a complete request.</p></div></div>
+          </div>
+          <div class="lead-card hidden" id="lead">
+            <div class="lead-head"><svg class="ico"><use href="#i-check"/></svg><span class="vi">Zalo nhóm Sales — yêu cầu mới</span><span class="en">Sales Zalo group — new request</span><span class="time">07:30</span></div>
+            <dl class="lead-body">
+              <div><dt class="vi">Khách</dt><dt class="en">Customer</dt><dd>Minh — <span class="vi">Công ty Điện ABC</span><span class="en">ABC Power Co.</span></dd></div>
+              <div><dt class="vi">Liên hệ</dt><dt class="en">Contact</dt><dd>Zalo 09xx xxx 168 <span class="vi">(đã đồng ý)</span><span class="en">(consented)</span></dd></div>
+              <div><dt class="vi">Nhu cầu</dt><dt class="en">Need</dt><dd><span class="vi">20 máy tính bảng · ngoài trời, mưa · cần 4G</span><span class="en">20 tablets · outdoor, rain · 4G</span></dd></div>
+              <div><dt class="vi">Gợi ý</dt><dt class="en">Suggested</dt><dd><span class="vi">Getac UX10 (khách ưu tiên gọn nhẹ)</span><span class="en">Getac UX10 (customer prefers lighter)</span></dd></div>
+              <div><dt class="vi">Việc cần làm</dt><dt class="en">To do</dt><dd><span class="vi">Gửi báo giá trong hôm nay</span><span class="en">Send a quote today</span></dd></div>
+            </dl>
+          </div>
+          <button class="replay" type="button" id="replay"><svg class="ico"><use href="#i-replay"/></svg><span class="vi">Xem lại cuộc trò chuyện</span><span class="en">Replay the conversation</span></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. RULES -->
+  <section class="s" id="rules">
+    <div class="wrap">
+      <div class="narrow reveal">
+        <p class="eyebrow"><b>5</b><span class="vi">Luật chơi</span><span class="en">Ground rules</span></p>
+        <h2 class="vi">Bốn điều trợ lý sẽ không bao giờ làm.</h2>
+        <h2 class="en">Four things the assistant will never do.</h2>
+        <p class="lead vi">Trợ lý tiếp nhận và chuẩn bị. Người của GRC VN luôn là người chốt.</p>
+        <p class="lead en">The assistant receives and prepares. A GRC VN person always closes.</p>
+      </div>
+      <div class="rules">
+        <div class="rule reveal"><span class="x"><svg class="ico"><use href="#i-x"/></svg></span><h3 class="vi">Tự báo giá hay hứa còn hàng</h3><h3 class="en">Quote prices or promise stock</h3><p class="vi">Giá phụ thuộc cấu hình, số lượng và chính sách của hãng. Luôn để kỹ sư báo.</p><p class="en">Price depends on configuration, volume and vendor policy. An engineer always quotes.</p></div>
+        <div class="rule reveal"><span class="x"><svg class="ico"><use href="#i-x"/></svg></span><h3 class="vi">Nói ngoài dữ liệu đã duyệt</h3><h3 class="en">Go beyond approved data</h3><p class="vi">Chỉ trả lời từ thông số chính hãng đã kiểm chứng. Không chắc thì chuyển cho người.</p><p class="en">Answers only from verified official specs. When unsure, it hands over to a person.</p></div>
+        <div class="rule reveal"><span class="x"><svg class="ico"><use href="#i-x"/></svg></span><h3 class="vi">Chốt hợp đồng</h3><h3 class="en">Close a deal</h3><p class="vi">Không ký, không cam kết thay công ty. Mọi thỏa thuận đều qua người của GRC VN.</p><p class="en">No signing, no commitments on the company’s behalf. Every agreement goes through GRC VN staff.</p></div>
+        <div class="rule reveal"><span class="x"><svg class="ico"><use href="#i-x"/></svg></span><h3 class="vi">Lưu thông tin khi chưa được phép</h3><h3 class="en">Keep data without consent</h3><p class="vi">Xin phép trước khi ghi nhận tên, số điện thoại — đúng Luật Bảo vệ dữ liệu cá nhân.</p><p class="en">Asks before recording names or numbers — in line with personal-data protection law.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. FAQ -->
+  <section class="s s-alt" id="faq">
+    <div class="wrap narrow">
+      <div class="reveal">
+        <p class="eyebrow"><b>6</b><span class="vi">Câu hỏi thường gặp</span><span class="en">Common questions</span></p>
+        <h2 class="vi">Những điều ban giám đốc hay hỏi.</h2>
+        <h2 class="en">What leadership usually asks.</h2>
+      </div>
+      <div class="faq reveal">
+        <details><summary><span class="vi">AI có thay thế nhân viên sales không?</span><span class="en">Does AI replace the sales team?</span></summary><p class="vi">Không. Trợ lý giống một lễ tân giỏi: tiếp khách, hỏi đúng câu, ghi lại nhu cầu. Sales dành thời gian cho những khách đã rõ nhu cầu và sẵn sàng mua.</p><p class="en">No. The assistant is like a great receptionist: it greets, asks the right questions and writes things down. Sales spends its time on buyers who are clear and ready.</p></details>
+        <details><summary><span class="vi">Nếu AI trả lời sai thì sao?</span><span class="en">What if the AI gets something wrong?</span></summary><p class="vi">Trợ lý chỉ được dùng dữ liệu từ datasheet chính hãng mà GRC VN đã duyệt. Mọi cuộc trò chuyện được lưu để kiểm tra, và câu hỏi khó luôn được chuyển cho kỹ sư.</p><p class="en">It may only use official datasheet data that GRC VN has approved. Every conversation is logged for review, and hard questions always go to an engineer.</p></details>
+        <details><summary><span class="vi">Chi phí khoảng bao nhiêu?</span><span class="en">What does it cost?</span></summary><p class="vi">Bước 1 nằm trong phần làm website. Bước 2 trả theo lượt dùng AI cộng hosting — thường thấp với lượng khách B2B. Đề xuất chạy thử 1 tháng để biết con số thật trước khi quyết định lâu dài.</p><p class="en">Step 1 is part of building the website. Step 2 is pay-per-use AI plus hosting — usually low for B2B traffic. We suggest a one-month trial to see real numbers before committing.</p></details>
+        <details><summary><span class="vi">Khách có buộc phải chat với AI không?</span><span class="en">Do customers have to chat with AI?</span></summary><p class="vi">Không. Nút gọi điện, Zalo và form liên hệ vẫn luôn ở đó. Trợ lý chỉ thêm một cách nhanh hơn — nhất là ngoài giờ làm việc.</p><p class="en">No. Call, Zalo and the contact form are always there. The assistant just adds a faster option — especially after hours.</p></details>
+        <details><summary><span class="vi">Khách nước ngoài thì sao?</span><span class="en">What about foreign customers?</span></summary><p class="vi">Trợ lý trả lời bằng tiếng Việt và tiếng Anh — phù hợp với các công ty dầu khí, nhà máy FDI và đối tác nước ngoài.</p><p class="en">The assistant answers in Vietnamese and English — a good fit for oil &amp; gas firms, foreign-invested plants and overseas partners.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. DECISIONS -->
+  <section class="s" id="decide">
+    <div class="wrap decide">
+      <div class="reveal">
+        <p class="eyebrow"><b>7</b><span class="vi">Bước tiếp theo</span><span class="en">Next steps</span></p>
+        <h2 class="vi">Bốn việc cần GRC VN quyết định.</h2>
+        <h2 class="en">Four decisions for GRC VN.</h2>
+        <p class="lead vi">Chỉ cần trả lời qua tin nhắn, file hay ảnh chụp — phần còn lại chúng tôi lo.</p>
+        <p class="lead en">Just reply by message, file or photo — we handle the rest.</p>
+        <div class="cta">
+          <a class="btn btn-red" href="../"><span class="vi">Xem 3 phương án thiết kế</span><span class="en">See the 3 design options</span><svg class="ico"><use href="#i-arrow"/></svg></a>
+        </div>
+      </div>
+      <ol class="checks reveal">
+        <li><div><b class="vi">Chọn phương án thiết kế</b><b class="en">Pick a design</b><span class="vi">A · Enterprise, B · Field Ops hoặc C · Blueprint.</span><span class="en">A · Enterprise, B · Field Ops or C · Blueprint.</span></div></li>
+        <li><div><b class="vi">Xác nhận nội dung</b><b class="en">Confirm the content</b><span class="vi">Email, số Zalo, sản phẩm đang bán, tư cách đối tác Getac/MiTAC.</span><span class="en">Email, Zalo number, products sold, Getac/MiTAC partner status.</span></div></li>
+        <li><div><b class="vi">Duyệt “luật” cho trợ lý</b><b class="en">Approve the assistant’s rules</b><span class="vi">Điều gì được nói, điều gì luôn chuyển cho người.</span><span class="en">What it may say, and what always goes to a person.</span></div></li>
+        <li><div><b class="vi">Chọn nơi nhận yêu cầu</b><b class="en">Choose where requests go</b><span class="vi">Zalo nhóm sales, email, hay cả hai.</span><span class="en">The sales Zalo group, email, or both.</span></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <span class="vi">Trang này được làm theo cách mới: AI cũng đọc được toàn bộ nội dung.</span>
+      <span class="en">This page is built the new way: AI can read every word of it.</span>
+      <a href="../">grcvn.vxid.io</a>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var KEY = 'grcvn-lang';
+      var root = document.documentElement;
+      function setLang(l) {
+        root.lang = l;
+        root.setAttribute('data-lang', l);
+        document.title = l === 'en' ? 'Websites in the AI era — A plan for GRC VN' : 'Website trong thời AI — Kế hoạch cho GRC VN';
+        document.querySelectorAll('[data-l]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-l') === l)); });
+        try { localStorage.setItem(KEY, l); } catch (e) {}
+      }
+      var q = new URLSearchParams(location.search).get('lang'), saved = null;
+      try { saved = localStorage.getItem(KEY); } catch (e) {}
+      setLang(q === 'en' || q === 'vi' ? q : (saved || ((navigator.language || 'vi').toLowerCase().indexOf('vi') === 0 ? 'vi' : 'en')));
+      document.addEventListener('click', function (e) { var b = e.target.closest('[data-l]'); if (b) setLang(b.getAttribute('data-l')); });
+
+      // Tabs: what people see / what AI sees.
+      var tabs = document.querySelectorAll('[data-tab]');
+      tabs.forEach(function (t) {
+        t.addEventListener('click', function () {
+          tabs.forEach(function (x) {
+            var on = x === t;
+            x.setAttribute('aria-selected', String(on));
+            document.getElementById(x.getAttribute('data-tab')).hidden = !on;
+          });
+        });
+      });
+
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // Scroll reveal.
+      var rev = document.querySelectorAll('.reveal');
+      if ('IntersectionObserver' in window && !reduce) {
+        var io = new IntersectionObserver(function (es) {
+          es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+        }, { threshold: 0.12 });
+        rev.forEach(function (el) { io.observe(el); });
+      } else {
+        rev.forEach(function (el) { el.classList.add('in'); });
+      }
+
+      // Chat demo: messages are in the HTML (readable without JS); JS replays them one by one.
+      var chat = document.getElementById('chat');
+      var msgs = [].slice.call(chat.querySelectorAll('.msg'));
+      var lead = document.getElementById('lead');
+      var annos = document.querySelectorAll('[data-anno]');
+      var timers = [];
+      function light(n) { annos.forEach(function (a) { a.classList.toggle('lit', a.getAttribute('data-anno') === String(n)); }); }
+      function clear() { timers.forEach(clearTimeout); timers = []; var ty = chat.querySelector('.typing'); if (ty) ty.remove(); }
+      function play() {
+        clear();
+        if (reduce) { chat.classList.remove('play'); lead.classList.remove('hidden'); return; }
+        chat.classList.add('play');
+        msgs.forEach(function (m) { m.classList.add('pending'); });
+        lead.classList.add('hidden');
+        light(0);
+        var t = 400;
+        msgs.forEach(function (m) {
+          var bot = m.classList.contains('b');
+          if (bot) {
+            timers.push(setTimeout(function () {
+              var ty = document.createElement('div');
+              ty.className = 'typing'; ty.innerHTML = '<i></i><i></i><i></i>';
+              chat.appendChild(ty); chat.scrollTop = chat.scrollHeight;
+            }, t));
+            t += 1000;
+          }
+          timers.push(setTimeout(function () {
+            var ty = chat.querySelector('.typing'); if (ty) ty.remove();
+            chat.appendChild(m);
+            m.classList.remove('pending');
+            chat.scrollTop = chat.scrollHeight;
+            if (m.getAttribute('data-n')) light(m.getAttribute('data-n'));
+          }, t));
+          t += bot ? 1500 : 1100;
+        });
+        timers.push(setTimeout(function () { lead.classList.remove('hidden'); light(0); }, t + 300));
+      }
+      var started = false;
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(function (es, o) {
+          if (es[0].isIntersecting && !started) { started = true; o.disconnect(); play(); }
+        }, { threshold: 0.35 }).observe(chat);
+      } else { lead.classList.remove('hidden'); }
+      document.getElementById('replay').addEventListener('click', function () { started = true; play(); });
+    })();
+  </script>
+</body>
+</html>
